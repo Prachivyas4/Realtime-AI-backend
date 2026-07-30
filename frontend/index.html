@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Realtime AI Session</title>
+</head>
+<body>
+  <h2>Realtime AI Session</h2>
+
+  <input id="msg" placeholder="Type message..." />
+  <button onclick="send()">Send</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    const sessionId = crypto.randomUUID();
+    const ws = new WebSocket(`ws://localhost:8000/ws/session/${sessionId}`);
+
+    ws.onmessage = (event) => {
+      document.getElementById("output").textContent += event.data;
+    };
+
+    function send() {
+      const msg = document.getElementById("msg").value;
+      document.getElementById("output").textContent += "\n\nUSER: " + msg + "\nAI: ";
+      ws.send(msg);
+      document.getElementById("msg").value = "";
+    }
+  </script>
+</body>
+</html>
