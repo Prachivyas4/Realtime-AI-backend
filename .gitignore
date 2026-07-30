@@ -1,4 +1,9 @@
 .DS_Store
 .Rhistory
-.DS_Store
-.Rhistory
+.env
+bin/
+lib/
+include/
+pyvenv.cfg
+__pycache__/
+*.pyc
